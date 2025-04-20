@@ -15,7 +15,7 @@ st.subheader("Example data visualization")
 st.markdown("This demo uses example data")
 
 # Generate example data
-X, _ = make_blobs(n_samples=300, centers=loaded_model.n_clusters, cluster_std=0.60, random_state=42)
+X, _ = make_blobs(n_samples=300, centers=loaded_model.n_clusters, cluster_std=0.60, random_state=0)
 
 # Predict cluster labels using the loaded k-means model
 y_kmeans = loaded_model.predict(X)
