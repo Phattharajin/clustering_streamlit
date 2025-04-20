@@ -7,12 +7,9 @@ from sklearn.datasets import make_blobs
 with open('kmeans_model.pkl', 'rb') as f:
    loaded_model = pickle.load(f)
 
-st.set_page_config(page_title="k-means Clustering App", layout="centered")
+st.set_page_config(page_title="k-means Clustering ", layout="centered")
 
-st.title("k-means Clustering Visualizer")
-
-st.subheader("Example data visualization")
-st.markdown("This demo uses example data")
+st.title("k-means Clustering Visualizer by Phattharajin Joyjaroen")
 
 # Generate example data
 X, _ = make_blobs(n_samples=300, centers=loaded_model.n_clusters, cluster_std=0.60, random_state=0)
@@ -21,11 +18,10 @@ X, _ = make_blobs(n_samples=300, centers=loaded_model.n_clusters, cluster_std=0.
 y_kmeans = loaded_model.predict(X)
 
 # Create scatter plot
-plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, s=50, cmap='viridis')
+fig, ax = plt.subplots()
+scatter= ax.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap='viridis')
+ax.scatter(loaded_model.cluster_centers_[:, 0], loaded_model.cluster_centers_[:, 1], s=300, c='red')
+ax.set_title('k-Means Clustering')
+ax.legend()
+st.pyplot(fig)
 
-# Mark the centroids
-centers = loaded_model.cluster_centers_
-plt.scatter(centers[:, 0], centers[:, 1], c='red', s=200, alpha=0.5, marker='X')
-
-# Display plot
-st.pyplot(plt)
